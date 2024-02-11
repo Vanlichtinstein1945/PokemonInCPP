@@ -10,16 +10,24 @@
 #include "Party.h"
 #include "Pokemon.h"
 #include <iostream>
+#include <vector>
 
 
 
-// Adding "std" Namespace For "cout", "floor", Etc.
+// Adding Namespace For "cout", "floor", Etc.
 using namespace std;
 
 
 
 // Constructor That Sets All Party Slots To NULL
-Party::Party() { for (int i = 0; i < 7; i++) { slots[i] = nullptr; } }
+Party::Party() { for (int i = 0; i < 7; i++) { slots.push_back(nullptr); } }
+
+// Destructor
+Party::~Party() {
+	for (auto i : slots)
+		delete i;
+	slots.clear();
+}
 
 // Returns The Pokemon In Slot "index"
 BasePokemon* Party::GetSlot(int index) {
@@ -43,6 +51,7 @@ void Party::SwapSlots(int index1, int index2) {
 	BasePokemon* temp = slots[index1];
 	slots[index1] = slots[index2];
 	slots[index2] = temp;
+	temp = nullptr;
 }
 
 // Prints The Names Of Each Party Member

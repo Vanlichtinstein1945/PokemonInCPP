@@ -3,12 +3,7 @@
 
 
 
-#include <string>
-
-
-
-// Adding "std" Namespace For "cout", "floor", Etc.
-using namespace std;
+#include <iostream>
 
 
 
@@ -163,19 +158,20 @@ public:
 // Class To Hold Database Info For Creating Pokemon
 class DatabaseInfo {
 public:
-	string name;
+	std::string name;
 	XPTYPE xpType;
 	TYPES type1;
 	TYPES type2;
 	Stats* baseStats;
-	DatabaseInfo(string, XPTYPE, TYPES, TYPES, Stats*);
+	DatabaseInfo(std::string, XPTYPE, TYPES, TYPES, Stats*);
+	inline ~DatabaseInfo() { delete baseStats; }
 };
 
 // Base Pokemon Class That Will Hold All Information About Any Generated Pokemon
 class BasePokemon {
 private:
 	int speciesIndex;
-	string name;
+	std::string name;
 	int totalXP;
 	int neededXP;
 	XPTYPE xpType;
@@ -197,7 +193,13 @@ private:
 public:
 	BasePokemon(int, int, DatabaseInfo*);
 	BasePokemon(int, int, int, Stats*, Stats*, int, NATURES, DatabaseInfo*);
-	inline string get_name() { return name; }
+	inline ~BasePokemon() {
+		delete baseStats;
+		delete IVs;
+		delete EVs;
+		delete combinedStats;
+	}
+	inline std::string get_name() { return name; }
 	inline int get_currHP() { return currHP; }
 	inline int get_speciesIndex() { return speciesIndex; }
 	inline int get_level() { return level; }

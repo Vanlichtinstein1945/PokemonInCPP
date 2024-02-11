@@ -4,6 +4,7 @@
 
 
 #include "Pokemon.h"
+#include <vector>
 
 
 
@@ -11,9 +12,10 @@
 class Party {
 private:
 	// Array Of Pointers To The Party's Pokemon
-	BasePokemon* slots[6];
+	std::vector<BasePokemon*> slots;
 public:
 	Party();
+	~Party();
 	BasePokemon* GetSlot(int);
 	void InsertPokemon(int, BasePokemon*);
 	BasePokemon* RemovePokemon(int);

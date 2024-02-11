@@ -10,20 +10,21 @@
 #include "Party.h"
 #include "PC.h"
 #include "Pokemon.h"
+#include "Moves.h"
+#include "Battle.h"
 #include "GUI.h"
-#include <iostream>
+#include <time.h>
 #include <SFML/Graphics.hpp>
 
 
 
-// Adding "std" Namespace For "cout", "floor", Etc.
+// Adding Namespace For "cout", "floor", Etc.
 using namespace sf;
-using namespace std;
 
 
 
 // Main Function To Test Program Up To This Point
-int main() {
+int mainGUI() {
 	// Creating SFML Window
 	RenderWindow window(VideoMode(800, 600), "Pokemon", Style::Titlebar);
 
@@ -85,6 +86,41 @@ int main() {
 		window.draw(QuitButton);
 		window.display();
 	}
+
+	// Delete Allocated Pointer
+	delete party;
+	party = nullptr;
+
+	return 0;
+}
+
+int main() {
+	// Setting Random Seed
+	srand(time(NULL));
+
+	// Creating Poison Move
+	Move* move = new Move("Poison Sting", Poison, Physical, 15, 100, 35, poison);
+
+	// Creating Two Pokemon Of Level 50
+	BasePokemon* pokemon1 = CreateBasePokemonFromTable(1, 50);
+	BasePokemon* pokemon2 = CreateBasePokemonFromTable(2, 50);
+
+	// Creating A Battle And Running Our Poison Move
+	Battle* battle = new Battle();
+	battle->RunMove(pokemon1, pokemon2, move);
+
+	// Deleting Our Allocated Pointers
+	delete move;
+	move = nullptr;
+	delete pokemon1;
+	pokemon1 = nullptr;
+	delete pokemon2;
+	pokemon2 = nullptr;
+	delete battle;
+	battle = nullptr;
+
+	// Running The GUI
+	//mainGUI();
 
 	return 0;
 }

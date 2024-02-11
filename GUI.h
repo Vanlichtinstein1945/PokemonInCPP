@@ -8,12 +8,6 @@
 
 
 
-// Adding "std" Namespace For "cout", "floor", Etc.
-using namespace sf;
-using namespace std;
-
-
-
 // Class To Handle Button Creation And Events
 class Button : public sf::Drawable{
 private:
@@ -21,16 +15,16 @@ private:
 	int Y;
 	int width;
 	int height;
-	Font font;
-	Text text;
-	Color buttonColor;
-	RectangleShape rect;
+	sf::Font font;
+	sf::Text text;
+	sf::Color buttonColor;
+	sf::RectangleShape rect;
 public:
-	Button(int, int, int, int, string, int, Color=Color(0, 0, 0), Color=Color(255, 255, 255), string="arial.ttf");
-	virtual void draw(RenderTarget&, RenderStates) const;
-	bool checkMouseInside(Vector2i);
-	bool clicked(Vector2i);
-	void hoverShade(Vector2i);
+	Button(int, int, int, int, std::string, int, sf::Color=sf::Color(0, 0, 0), sf::Color=sf::Color(255, 255, 255), std::string="arial.ttf");
+	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
+	bool checkMouseInside(sf::Vector2i);
+	bool clicked(sf::Vector2i);
+	void hoverShade(sf::Vector2i);
 };
 
 
