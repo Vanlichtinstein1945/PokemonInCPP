@@ -2,7 +2,7 @@
 *
 *
 *	Brenan Patrick
-*	Main.cpp
+*	GUI.cpp
 *
 *
 */
