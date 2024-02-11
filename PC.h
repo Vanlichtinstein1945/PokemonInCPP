@@ -11,8 +11,9 @@
 // Base PC Class That Will Hold All Information About Any Saved Pokemon
 class PC {
 private:
-	vector<BasePokemon*> pokemon;
+	std::vector<BasePokemon*> pokemon;
 public:
+	~PC();
 	BasePokemon* GetPokemonAtIndex(int);
 	void DepositPokemonLast(BasePokemon*);
 	BasePokemon* RemovePokemonSpecific(int);
