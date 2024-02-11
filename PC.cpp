@@ -16,10 +16,17 @@
 
 
 
-// Adding "std" Namespace For "cout", "floor", Etc.
+// Adding Namespace For "cout", "floor", Etc.
 using namespace std;
 
 
+
+// PC Deconstructor
+PC::~PC() {
+	for (auto i : pokemon)
+		delete i;
+	pokemon.clear();
+}
 
 // Grabbing The Pokemon At "index" From PC For Printing And Data Checking Purposes
 BasePokemon* PC::GetPokemonAtIndex(int index) {
@@ -43,6 +50,7 @@ void PC::SwapPokemon(int index1, int index2) {
 	BasePokemon* temp = pokemon[index1];
 	pokemon[index1] = pokemon[index2];
 	pokemon[index2] = temp;
+	temp = nullptr;
 }
 
 // Printing All Pokemon's Names That Are Currently In The PC, And Their Index
@@ -128,6 +136,7 @@ void PC::loadPC() {
 		BasePokemon* tempPoke = CreateBasePokemonFromStats(index, level, totalXP, new Stats(IVHP, IVAttack, IVDefense, IVSpAttack, IVSpDefense, IVSpeed), new Stats(EVHP, EVAttack, EVDefense, EVSpAttack, EVSpDefense, EVSpeed), currHP, nature);
 		// Push New Pokemon To The End Of The Vector (Keeps Same PC Order From When It Was Saved)
 		pokemon.push_back(tempPoke);
+		tempPoke = nullptr;
 		if (pcData.eof()) { break; }
 	}
 	pcData.close();
