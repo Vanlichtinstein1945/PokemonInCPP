@@ -13,7 +13,7 @@
 
 
 
-// Adding "std" Namespace For "cout", "floor", Etc.
+// Adding Namespace For "cout", "floor", Etc.
 using namespace sf;
 using namespace std;
 
