@@ -16,7 +16,7 @@
 
 
 
-// Adding "std" Namespace For "cout", "floor", Etc.
+// Adding Namespace For "cout", "floor", Etc.
 using namespace std;
 
 
@@ -212,7 +212,6 @@ void BasePokemon::determineCombinedStats() {
 
 // BasePokemon Constructor From Table
 BasePokemon::BasePokemon(int speciesIndex, int level, DatabaseInfo* databaseInfo) {
-	srand(time(NULL));
 	this->speciesIndex = speciesIndex;
 	this->name = databaseInfo->name;
 	this->level = level;
@@ -231,7 +230,6 @@ BasePokemon::BasePokemon(int speciesIndex, int level, DatabaseInfo* databaseInfo
 
 // BasePokemon Constructor From Table And Given Stats
 BasePokemon::BasePokemon(int speciesIndex, int level, int totalXP, Stats* IVs, Stats* EVs, int currHP, NATURES nature, DatabaseInfo* databaseInfo) {
-	srand(time(NULL));
 	this->speciesIndex = speciesIndex;
 	this->name = databaseInfo->name;
 	this->level = level;
@@ -246,6 +244,7 @@ BasePokemon::BasePokemon(int speciesIndex, int level, int totalXP, Stats* IVs, S
 	this->EVs = EVs;
 	determineCombinedStats();
 	this->currHP = currHP;
+	delete databaseInfo;
 }
 
 // Function To Return The Typings
