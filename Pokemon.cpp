@@ -21,18 +21,8 @@ using namespace std;
 
 
 
-// Stats Constructor
-Stats::Stats(int hp, int atk, int def, int spAtk, int spDef, int spd) {
-	this->hp = hp;
-	this->atk = atk;
-	this->def = def;
-	this->spAtk = spAtk;
-	this->spDef = spDef;
-	this->spd = spd;
-}
-
 // Basic Stats Getter
-int Stats::get_stat(STAT stat) {
+int Stats::get_stat(STAT stat) const {
 	switch (stat) {
 	case HP:
 		return hp;
@@ -152,7 +142,7 @@ void BasePokemon::generateIVs() {
 }
 
 // Getting Stat Modifier From Current Nature
-float BasePokemon::getNatureModifier(STAT stat) {
+float BasePokemon::getNatureModifier(STAT stat) const {
 	float modifier = 1;
 	switch (stat) {
 	case ATK:
@@ -211,17 +201,13 @@ void BasePokemon::determineCombinedStats() {
 }
 
 // BasePokemon Constructor From Table
-BasePokemon::BasePokemon(int speciesIndex, int level, DatabaseInfo* databaseInfo) {
-	this->speciesIndex = speciesIndex;
-	this->name = databaseInfo->name;
-	this->level = level;
-	this->xpType = databaseInfo->xpType;
+BasePokemon::BasePokemon(int speciesIndex, int level, DatabaseInfo* databaseInfo)
+	: speciesIndex{speciesIndex}, name{databaseInfo->name}, level{level}, xpType{databaseInfo->xpType},
+	  type1{databaseInfo->type1}, type2{databaseInfo->type2}, baseStats{databaseInfo->baseStats}
+	{
 	determineTotalXPFromLevel();
 	determineNeededXPFromLevel();
-	this->type1 = databaseInfo->type1;
-	this->type2 = databaseInfo->type2;
 	determineNature();
-	this->baseStats = databaseInfo->baseStats;
 	generateIVs();
 	EVs = new Stats(0, 0, 0, 0, 0, 0);
 	determineCombinedStats();
@@ -229,21 +215,13 @@ BasePokemon::BasePokemon(int speciesIndex, int level, DatabaseInfo* databaseInfo
 }
 
 // BasePokemon Constructor From Table And Given Stats
-BasePokemon::BasePokemon(int speciesIndex, int level, int totalXP, Stats* IVs, Stats* EVs, int currHP, NATURES nature, DatabaseInfo* databaseInfo) {
-	this->speciesIndex = speciesIndex;
-	this->name = databaseInfo->name;
-	this->level = level;
-	this->xpType = databaseInfo->xpType;
-	this->totalXP = totalXP;
+BasePokemon::BasePokemon(int speciesIndex, int level, int totalXP, Stats* IVs, Stats* EVs, int currHP, NATURES nature, DatabaseInfo* databaseInfo)
+	: speciesIndex{speciesIndex}, name{databaseInfo->name}, level{level}, xpType{databaseInfo->xpType},
+	totalXP{ totalXP }, type1{databaseInfo->type1}, type2{databaseInfo->type2}, nature{nature},
+	baseStats{databaseInfo->baseStats}, IVs{IVs}, EVs{EVs}, currHP{currHP}
+	{
 	determineNeededXPFromLevel();
-	this->type1 = databaseInfo->type1;
-	this->type2 = databaseInfo->type2;
-	this->nature = nature;
-	this->baseStats = databaseInfo->baseStats;
-	this->IVs = IVs;
-	this->EVs = EVs;
 	determineCombinedStats();
-	this->currHP = currHP;
 	delete databaseInfo;
 }
 
@@ -251,7 +229,7 @@ BasePokemon::BasePokemon(int speciesIndex, int level, int totalXP, Stats* IVs, S
 TYPES* BasePokemon::get_types() { static TYPES tempTypes[2]; tempTypes[0] = type1; tempTypes[1] = type2; return tempTypes; }
 
 // Function To Get IVs
-int BasePokemon::get_IV(STAT stat) {
+int BasePokemon::get_IV(STAT stat) const {
 	switch (stat) {
 	case HP:    return IVs->get_stat(HP);
 	case ATK:   return IVs->get_stat(ATK);
@@ -263,7 +241,7 @@ int BasePokemon::get_IV(STAT stat) {
 }
 
 // Function To Get EVs
-int BasePokemon::get_EV(STAT stat) {
+int BasePokemon::get_EV(STAT stat) const {
 	switch (stat) {
 	case HP:    return EVs->get_stat(HP);
 	case ATK:   return EVs->get_stat(ATK);
@@ -275,7 +253,7 @@ int BasePokemon::get_EV(STAT stat) {
 }
 
 // Function To Get Combined Stats
-int BasePokemon::get_stat(STAT stat) {
+int BasePokemon::get_stat(STAT stat) const {
 	switch (stat) {
 	case HP:    return combinedStats->get_stat(HP);
 	case ATK:   return combinedStats->get_stat(ATK);
@@ -297,7 +275,7 @@ void BasePokemon::Heal(int amount) {
 }
 
 // Printing The Generated Pokemon's Stats To The Console
-void BasePokemon::print_stats() {
+void BasePokemon::print_stats() const{
 	cout << "--- Pokemon Stats ---\n";
 	cout << name << "\n";
 	cout << "Type 1: " << TYPES_STRINGS[(int)type1] << "\n";
@@ -337,15 +315,6 @@ void BasePokemon::print_stats() {
 	cout << "SPDEF:    " << EVs->get_stat(SPDEF) << "\n";
 	cout << "SPD:      " << EVs->get_stat(SPD) << "\n";
 	cout << "\n";
-}
-
-// DatabaseInfo Constructor
-DatabaseInfo::DatabaseInfo(string name, XPTYPE xpType, TYPES type1, TYPES type2, Stats* baseStats) {
-	this->name = name;
-	this->xpType = xpType;
-	this->type1 = type1;
-	this->type2 = type2;
-	this->baseStats = baseStats;
 }
 
 // Function To Read Variables From Pokemon Database

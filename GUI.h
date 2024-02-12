@@ -19,11 +19,16 @@ private:
 	sf::Text text;
 	sf::Color buttonColor;
 	sf::RectangleShape rect;
+
 public:
 	Button(int, int, int, int, std::string, int, sf::Color=sf::Color(0, 0, 0), sf::Color=sf::Color(255, 255, 255), std::string="arial.ttf");
+	
 	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
-	bool checkMouseInside(sf::Vector2i);
-	bool clicked(sf::Vector2i);
+	
+	bool checkMouseInside(sf::Vector2i) const;
+	
+	bool clicked(sf::Vector2i) const;
+	
 	void hoverShade(sf::Vector2i);
 };
 

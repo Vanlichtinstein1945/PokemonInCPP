@@ -20,11 +20,9 @@ using namespace std;
 
 
 // Button Constructor
-Button::Button(int X, int Y, int width, int height, string buttonText, int textSize, Color textColor, Color buttonColor, string fontFilepath) {
-	this->X = X;
-	this->Y = Y;
-	this->width = width;
-	this->height = height;
+Button::Button(int X, int Y, int width, int height, string buttonText, int textSize, Color textColor, Color buttonColor, string fontFilepath)
+	: X{X}, Y{Y}, width{width}, height{height}, buttonColor{buttonColor}, rect{RectangleShape(Vector2f(width, height))}
+	{
 	// Load Font And Set Text String/Position/Color
 	if (!font.loadFromFile(fontFilepath)) {
 		cout << "COULDN'T LOAD FONT: " << fontFilepath << "\n";
@@ -37,10 +35,7 @@ Button::Button(int X, int Y, int width, int height, string buttonText, int textS
 	text.setOrigin(textRect.left + textRect.width / 2.0f,
 		textRect.top + textRect.height / 2.0f);
 	text.setPosition(X + width / 2, Y + height / 2);
-	// Creating Rectangle Shape And Setting Position/Color
-	rect = RectangleShape(Vector2f(width, height));
 	rect.setPosition(X, Y);
-	this->buttonColor = buttonColor;
 	rect.setFillColor(buttonColor);
 }
 
@@ -51,13 +46,13 @@ void Button::draw(RenderTarget& target, RenderStates states) const {
 }
 
 // Testing If Mouse Is Inside Of Button Area
-bool Button::checkMouseInside(Vector2i mousePos) {
+bool Button::checkMouseInside(Vector2i mousePos) const {
 	if ((mousePos.x > X && mousePos.x < X + width) && (mousePos.y > Y && mousePos.y < Y + height)) { return true; }
 	else { return false; }
 }
 
 // Same As "checkMouseInside" But Was Created First For Click Event (May Remove later)
-bool Button::clicked(Vector2i mousePos) {
+bool Button::clicked(Vector2i mousePos) const {
 	if (checkMouseInside(mousePos)) { return true; }
 	else { return false; }
 }

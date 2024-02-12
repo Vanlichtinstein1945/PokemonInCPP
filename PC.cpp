@@ -29,7 +29,7 @@ PC::~PC() {
 }
 
 // Grabbing The Pokemon At "index" From PC For Printing And Data Checking Purposes
-BasePokemon* PC::GetPokemonAtIndex(int index) {
+BasePokemon* PC::GetPokemonAtIndex(int index) const {
 	return pokemon[index];
 }
 
@@ -54,7 +54,7 @@ void PC::SwapPokemon(int index1, int index2) {
 }
 
 // Printing All Pokemon's Names That Are Currently In The PC, And Their Index
-void PC::printPC() {
+void PC::printPC() const {
 	cout << "------- PC --------\n";
 	int index = 0;
 	for (BasePokemon* i : pokemon) {
@@ -65,7 +65,7 @@ void PC::printPC() {
 }
 
 // Function For Saving Pokemon Store In PC To A ".csv" File
-void PC::savePC() {
+void PC::savePC() const {
 	// Remove Old Saved PC Data If It Exists.
 	// Prevents Corrupt Or Cheated Data
 	remove("PCData.csv");

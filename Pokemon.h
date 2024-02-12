@@ -8,7 +8,7 @@
 
 
 // Creating Typings
-enum TYPES {
+const enum TYPES {
 	None,
 	Normal,
 	Fire,
@@ -31,7 +31,7 @@ enum TYPES {
 };
 
 // Conversion List For "TYPES" To String For Printing And Database Generation
-constexpr const char* TYPES_STRINGS[] = {
+const std::string TYPES_STRINGS[] = {
 	"None",
 	"Normal",
 	"Fire",
@@ -54,7 +54,7 @@ constexpr const char* TYPES_STRINGS[] = {
 };
 
 // Creating XP Typings
-enum XPTYPE {
+const enum XPTYPE {
 	Erratic,
 	Fast,
 	MediumFast,
@@ -64,7 +64,7 @@ enum XPTYPE {
 };
 
 // Conversion List For "XPTYPE" To String For Printing And Database Generation
-constexpr const char* XPTYPE_STRINGS[] = {
+const std::string XPTYPE_STRINGS[] = {
 	"Erratic",
 	"Fast",
 	"MediumFast",
@@ -74,7 +74,7 @@ constexpr const char* XPTYPE_STRINGS[] = {
 };
 
 // Creating Stat Identifiers
-enum STAT {
+const enum STAT {
 	HP,
 	ATK,
 	DEF,
@@ -84,7 +84,7 @@ enum STAT {
 };
 
 // Creating Nature Typings
-enum NATURES {
+const enum NATURES {
 	Hardy,
 	Lonely,
 	Adamant,
@@ -113,7 +113,7 @@ enum NATURES {
 };
 
 // Conversion List For "NATURES" To String For Printing
-constexpr const char* NATURES_STRINGS[] = {
+const std::string NATURES_STRINGS[] = {
 	"Hardy",
 	"Lonely",
 	"Adamant",
@@ -141,82 +141,115 @@ constexpr const char* NATURES_STRINGS[] = {
 	"Serious"
 };
 
+
 // Class To Hold Stats Together
 class Stats {
 private:
-	int hp;
-	int atk;
-	int def;
-	int spAtk;
-	int spDef;
-	int spd;
+	const int hp;
+	const int atk;
+	const int def;
+	const int spAtk;
+	const int spDef;
+	const int spd;
+
 public:
-	Stats(int, int, int, int, int, int);
-	int get_stat(STAT);
+	inline Stats(int hp, int atk, int def, int spAtk, int spDef, int spd)
+		: hp{ hp }, atk{ atk }, def{ def }, spAtk{ spAtk }, spDef{ spDef }, spd{ spd } {}
+	
+	int get_stat(STAT) const;
 };
 
 // Class To Hold Database Info For Creating Pokemon
 class DatabaseInfo {
 public:
-	std::string name;
-	XPTYPE xpType;
-	TYPES type1;
-	TYPES type2;
+	const std::string name;
+	const XPTYPE xpType;
+	const TYPES type1;
+	const TYPES type2;
 	Stats* baseStats;
-	DatabaseInfo(std::string, XPTYPE, TYPES, TYPES, Stats*);
+	
+	inline DatabaseInfo(std::string name, XPTYPE xpType, TYPES type1, TYPES type2, Stats* baseStats)
+		: name{ name }, xpType{ xpType }, type1{ type1 }, type2{ type2 }, baseStats{ baseStats } {}
+	
 	inline ~DatabaseInfo() { delete baseStats; }
 };
+
 
 // Base Pokemon Class That Will Hold All Information About Any Generated Pokemon
 class BasePokemon {
 private:
-	int speciesIndex;
-	std::string name;
+	const int speciesIndex;
+	const std::string name;
 	int totalXP;
 	int neededXP;
-	XPTYPE xpType;
+	const XPTYPE xpType;
 	int level;
-	TYPES type1;
-	TYPES type2;
+	const TYPES type1;
+	const TYPES type2;
 	NATURES nature;
 	Stats* baseStats;
 	Stats* IVs;
 	Stats* EVs;
 	Stats* combinedStats;
 	int currHP;
+	
 	void determineNeededXPFromLevel();
+	
 	void determineTotalXPFromLevel();
+	
 	void determineNature();
+	
 	void generateIVs();
-	float getNatureModifier(STAT);
+	
+	float getNatureModifier(STAT) const;
+	
 	void determineCombinedStats();
+
 public:
 	BasePokemon(int, int, DatabaseInfo*);
+	
 	BasePokemon(int, int, int, Stats*, Stats*, int, NATURES, DatabaseInfo*);
+	
 	inline ~BasePokemon() {
 		delete baseStats;
 		delete IVs;
 		delete EVs;
 		delete combinedStats;
 	}
-	inline std::string get_name() { return name; }
-	inline int get_currHP() { return currHP; }
-	inline int get_speciesIndex() { return speciesIndex; }
-	inline int get_level() { return level; }
-	inline int get_totalXP() { return totalXP; }
-	inline NATURES get_nature() { return nature; }
+	
+	inline std::string get_name() const { return name; }
+	
+	inline int get_currHP() const { return currHP; }
+	
+	inline int get_speciesIndex() const { return speciesIndex; }
+	
+	inline int get_level() const { return level; }
+	
+	inline int get_totalXP() const { return totalXP; }
+	
+	inline NATURES get_nature() const { return nature; }
+	
 	TYPES* get_types();
-	int get_IV(STAT);
-	int get_EV(STAT);
-	int get_stat(STAT);
+	
+	int get_IV(STAT) const;
+	
+	int get_EV(STAT) const;
+	
+	int get_stat(STAT) const;
+	
 	void TakeDamage(int);
+	
 	void Heal(int);
-	void print_stats();
+	
+	void print_stats() const;
 };
+
 
 // Pokemon Creation And Reading Functions
 DatabaseInfo* ReadFromDatabase(int);
+
 BasePokemon* CreateBasePokemonFromTable(int, int);
+
 BasePokemon* CreateBasePokemonFromStats(int, int, int, Stats*, Stats*, int, NATURES);
 
 

@@ -30,7 +30,7 @@ Party::~Party() {
 }
 
 // Returns The Pokemon In Slot "index"
-BasePokemon* Party::GetSlot(int index) {
+BasePokemon* Party::GetSlot(int index) const {
 	return slots[index];
 }
 
@@ -56,7 +56,7 @@ void Party::SwapSlots(int index1, int index2) {
 
 // Prints The Names Of Each Party Member
 // Prints "EMPTY" If The Slot Has No Member
-void Party::PrintParty() {
+void Party::PrintParty() const {
 	if (slots[0] != nullptr) { cout << "Slot1: " << slots[0]->get_name() << "\n"; }
 	else { cout << "Slot1: EMPTY\n"; }
 	if (slots[1] != nullptr) { cout << "Slot2: " << slots[1]->get_name() << "\n"; }
@@ -74,7 +74,7 @@ void Party::PrintParty() {
 
 // Returning The Index Of The First Empty Slot
 // If All Slots Are Full, Return "-1"
-int Party::GetFirstEmptySlot() {
+int Party::GetFirstEmptySlot() const {
 	for (int i = 0; i < 7; i++) {
 		if (slots[i] == nullptr) {
 			return i;
@@ -85,7 +85,7 @@ int Party::GetFirstEmptySlot() {
 
 // Return The Index Of The First Pokemon Who Has Health
 // If No Pokemon Has Health, Return "-1"
-int Party::GetFirstPokemonWithHealth() {
+int Party::GetFirstPokemonWithHealth() const {
 	for (int i = 0; i < 7; i++) {
 		if (slots[i] != nullptr) {
 			if (slots[i]->get_currHP() != 0) { return i; }

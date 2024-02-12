@@ -99,7 +99,7 @@ int main() {
 	srand(time(NULL));
 
 	// Creating Poison Move
-	Move* move = new Move("Poison Sting", Poison, Physical, 15, 100, 35, poison);
+	Move* move = CreateMoveFromTable("Poison Sting");
 
 	// Creating Two Pokemon Of Level 50
 	BasePokemon* pokemon1 = CreateBasePokemonFromTable(1, 50);

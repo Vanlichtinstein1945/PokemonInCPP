@@ -12,14 +12,22 @@
 class PC {
 private:
 	std::vector<BasePokemon*> pokemon;
+
 public:
 	~PC();
-	BasePokemon* GetPokemonAtIndex(int);
+	
+	BasePokemon* GetPokemonAtIndex(int) const;
+	
 	void DepositPokemonLast(BasePokemon*);
+	
 	BasePokemon* RemovePokemonSpecific(int);
+	
 	void SwapPokemon(int, int);
-	void printPC();
-	void savePC();
+	
+	void printPC() const;
+	
+	void savePC() const;
+	
 	void loadPC();
 };
 

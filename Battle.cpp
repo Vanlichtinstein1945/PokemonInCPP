@@ -20,14 +20,14 @@ using namespace std;
 
 
 // Ratios Of Evasion And Accuracy Based On Stage
-float Battle::accuracyStages[] = { (float)33 / 100, (float)36 / 100, (float)43 / 100,
+const float accuracyStages[] = { (float)33 / 100, (float)36 / 100, (float)43 / 100,
 				 				   (float)50 / 100, (float)60 / 100, (float)75 / 100,
 								   (float)100 / 100, (float)133 / 100, (float)166 / 100,
 								   (float)200 / 100, (float)250 / 100, (float)266 / 100,
 								   (float)300 / 100 };
 
 // Once A Move Is Decided To Be Used, This Function Will Test If It Hits And Run Its Effects
-void Battle::RunMove(BasePokemon* pokemon1, BasePokemon* pokemon2, Move* move) {
+void Battle::RunMove(BasePokemon* pokemon1, BasePokemon* pokemon2, Move* move) const {
 	// Combine Accuracy And Evasion For Move Hit Testing
 	int tempAccStage = accuracyStage;
 	tempAccStage -= evasionStage;

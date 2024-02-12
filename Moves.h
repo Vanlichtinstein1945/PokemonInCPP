@@ -9,16 +9,6 @@
 
 
 
-// Class For Holding Status Information
-class Status {
-private:
-	std::string name;
-	std::string startMessage;
-public:
-	Status(std::string, std::string);
-	inline std::string get_message() { return startMessage; }
-};
-
 // STATUS Enum
 enum STATUS {
 	poison,
@@ -35,23 +25,49 @@ enum CATEGORIES {
 	StatusChanging
 };
 
+extern const float effectiveChart[18][18];
+
+
+// Class For Holding Status Information
+class Status {
+private:
+	const std::string name;
+	const std::string startMessage;
+public:
+	inline Status(std::string name, std::string startMessage) : name{ name }, startMessage{ startMessage } {}
+	inline std::string get_message() const { return startMessage; }
+};
+
+
+extern const std::map<STATUS, Status*> Statuses;
+
+
 // Class For Holding A Moves Data And Performing Its Actions
 class Move {
-	static float effectiveChart[18][18];
 public:
-	static std::map<STATUS, Status*> Statuses;
-	std::string name;
-	TYPES type;
-	CATEGORIES category;
-	int power;
-	int accuracy;
-	int maxPP;
+	const std::string name;
+	const TYPES type;
+	const CATEGORIES category;
+	const int power;
+	const int accuracy;
+	const int maxPP;
 	int currPP;
-	STATUS status;
-	Move(std::string, TYPES, CATEGORIES, int, int, int, STATUS);
+	const STATUS status;
+
+	inline Move(std::string name, TYPES type, CATEGORIES category, int power, int accuracy, int maxPP, STATUS status)
+		: name{ name }, type{ type }, category{ category }, power{ power }, accuracy{ accuracy }, maxPP{ maxPP }, status{ status }
+	{
+		currPP = maxPP;
+	}
+
 	~Move();
-	void hit(int, BasePokemon*, BasePokemon*);
+
+	void hit(int, BasePokemon*, BasePokemon*) const;
 };
+
+
+// Move Creation Functions
+Move* CreateMoveFromTable(std::string);
 
 
 
