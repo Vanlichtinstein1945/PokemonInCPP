@@ -10,7 +10,7 @@
 
 
 // STATUS Enum
-constexpr enum STATUS {
+const enum STATUS {
 	poison,
 	burn,
 	sleep,
@@ -19,7 +19,7 @@ constexpr enum STATUS {
 };
 
 // Move Categories
-constexpr enum CATEGORIES {
+const enum CATEGORIES {
 	Physical,
 	Special,
 	StatusChanging

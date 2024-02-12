@@ -83,7 +83,7 @@ void Move::hit(int chanceToBonus, BasePokemon* atkPokemon, BasePokemon* defPokem
 		A = atkPokemon->get_stat(SPATK);
 		D = defPokemon->get_stat(SPDEF);
 	}
-	int crit = 1;
+	float crit = 1;
 	if (rand() % 17 == 0) { crit = 2; }
 	float STAB = 1;
 	const TYPES* atkTypes = atkPokemon->get_types();

@@ -34,7 +34,7 @@ constexpr int Stats::get_stat(STAT stat) const {
 		return spAtk;
 	case SPDEF:
 		return spDef;
-	case SPD:
+	default:
 		return spd;
 	}
 }
@@ -70,7 +70,7 @@ void BasePokemon::determineNeededXPFromLevel() {
 		case Slow:
 			neededXP = (5 * (level + 1 * level + 1 * level + 1)) / 4;
 			break;
-		case Fluctuating:
+		default:
 			if (level < 15) {
 				neededXP = ((level + 1 * level + 1 * level + 1) * (floor((level + 1 + 1) / 3) + 24)) / 50;
 			}
@@ -116,7 +116,7 @@ void BasePokemon::determineTotalXPFromLevel() {
 		case Slow:
 			totalXP = (5 * (level * level * level)) / 4;
 			break;
-		case Fluctuating:
+		default:
 			if (level < 15) {
 				totalXP = ((level * level * level) * (floor((level + 1) / 3) + 24)) / 50;
 			}
@@ -177,7 +177,7 @@ constexpr float BasePokemon::getNatureModifier(STAT stat) const {
 			modifier = 0.9f;
 		}
 		break;
-	case SPD:
+	default:
 		if (nature == Timid || nature == Hasty || nature == Jolly || nature == Naive) {
 			modifier = 1.1f;
 		}
@@ -344,11 +344,11 @@ DatabaseInfo* ReadFromDatabase(int pokemonIndex) {
 		if (tempIndex == pokemonIndex) {
 			getline(database, name, ',');
 			getline(database, temp, ',');
-			xpType = (XPTYPE)distance(XPTYPE_STRINGS, find(XPTYPE_STRINGS, XPTYPE_STRINGS + sizeof XPTYPE_STRINGS, temp));
+			xpType = (XPTYPE)stoi(temp);
 			getline(database, temp, ',');
-			type1 = (TYPES)distance(TYPES_STRINGS, find(TYPES_STRINGS, TYPES_STRINGS + sizeof TYPES_STRINGS, temp));
+			type1 = (TYPES)stoi(temp);
 			getline(database, temp, ',');
-			type2 = (TYPES)distance(TYPES_STRINGS, find(TYPES_STRINGS, TYPES_STRINGS + sizeof TYPES_STRINGS, temp));
+			type2 = (TYPES)stoi(temp);
 			getline(database, temp, ',');
 			hp = stoi(temp);
 			getline(database, temp, ',');

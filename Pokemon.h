@@ -8,7 +8,7 @@
 
 
 // Creating Typings
-constexpr enum TYPES {
+const enum TYPES {
 	None,
 	Normal,
 	Fire,
@@ -54,7 +54,7 @@ const std::string TYPES_STRINGS[] = {
 };
 
 // Creating XP Typings
-constexpr enum XPTYPE {
+const enum XPTYPE {
 	Erratic,
 	Fast,
 	MediumFast,
@@ -74,7 +74,7 @@ const std::string XPTYPE_STRINGS[] = {
 };
 
 // Creating Stat Identifiers
-constexpr enum STAT {
+const enum STAT {
 	HP,
 	ATK,
 	DEF,
@@ -84,7 +84,7 @@ constexpr enum STAT {
 };
 
 // Creating Nature Typings
-constexpr enum NATURES {
+const enum NATURES {
 	Hardy,
 	Lonely,
 	Adamant,
