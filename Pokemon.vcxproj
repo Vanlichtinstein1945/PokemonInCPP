@@ -152,6 +152,8 @@
     <ClCompile Include="Party.cpp" />
     <ClCompile Include="PC.cpp" />
     <ClCompile Include="Pokemon.cpp" />
+    <ClCompile Include="Moves.cpp" />
+    <ClCompile Include="Battle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PCData.csv" />
@@ -162,6 +164,8 @@
     <ClInclude Include="Party.h" />
     <ClInclude Include="PC.h" />
     <ClInclude Include="Pokemon.h" />
+    <clInclude Include="Moves.h" />
+    <clInclude Include="Battle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
