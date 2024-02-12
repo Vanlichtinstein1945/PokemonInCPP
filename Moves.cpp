@@ -9,6 +9,8 @@
 // Inclusions
 #include "Moves.h"
 #include <iostream>
+#include <sstream>
+#include <fstream>
 
 
 
@@ -131,4 +133,51 @@ void Move::hit(int chanceToBonus, BasePokemon* atkPokemon, BasePokemon* defPokem
 	if (rand() % 101 < chanceToBonus) {
 		cout << defPokemon->get_name() << Statuses[status]->get_message() << "\n";
 	}
+}
+
+// Returns A Move Based On Table Stats From Given Name
+Move* CreateMoveFromTable(string name) {
+	// Generating Variables For Move Creation
+	TYPES type;
+	CATEGORIES category;
+	int power;
+	int accuracy;
+	int maxPP;
+	STATUS status;
+
+	// Reading File For Specific Move's Stats
+	// Based On Given Name
+	fstream database;
+	database.open("Moves.csv", ios::in);
+	string temp;
+	while (getline(database, temp, ',')) {
+		if (temp == name) {
+			getline(database, temp, ',');
+			type = (TYPES)stoi(temp);
+			getline(database, temp, ',');
+			category = (CATEGORIES)stoi(temp);
+			getline(database, temp, ',');
+			power = stoi(temp);
+			getline(database, temp, ',');
+			accuracy = stoi(temp);
+			getline(database, temp, ',');
+			maxPP = stoi(temp);
+			getline(database, temp);
+			status = (STATUS)stoi(temp);
+			break;
+		}
+		else {
+			getline(database, temp, ',');
+			getline(database, temp, ',');
+			getline(database, temp, ',');
+			getline(database, temp, ',');
+			getline(database, temp, ',');
+			getline(database, temp);
+		}
+		if (database.eof()) { break; }
+	}
+
+	database.close();
+
+	return new Move(name, type, category, power, accuracy, maxPP, status);
 }

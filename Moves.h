@@ -53,6 +53,9 @@ public:
 	void hit(int, BasePokemon*, BasePokemon*);
 };
 
+// Move Creation Functions
+Move* CreateMoveFromTable(std::string);
+
 
 
 #endif

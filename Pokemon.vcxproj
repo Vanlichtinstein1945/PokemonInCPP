@@ -156,6 +156,7 @@
     <ClCompile Include="Battle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Moves.csv" />
     <None Include="PCData.csv" />
     <None Include="pokemonData.csv" />
   </ItemGroup>
