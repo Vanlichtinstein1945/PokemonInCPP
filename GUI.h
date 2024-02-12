@@ -11,17 +11,17 @@
 // Class To Handle Button Creation And Events
 class Button : public sf::Drawable{
 private:
-	int X;
-	int Y;
-	int width;
-	int height;
+	float X;
+	float Y;
+	float width;
+	float height;
 	sf::Font font;
 	sf::Text text;
 	sf::Color buttonColor;
 	sf::RectangleShape rect;
 
 public:
-	Button(int, int, int, int, std::string, int, sf::Color=sf::Color(0, 0, 0), sf::Color=sf::Color(255, 255, 255), std::string="arial.ttf");
+	Button(float, float, float, float, std::string, int, sf::Color=sf::Color(0, 0, 0), sf::Color=sf::Color(255, 255, 255), std::string="arial.ttf");
 	
 	virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
 	

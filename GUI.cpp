@@ -20,7 +20,7 @@ using namespace std;
 
 
 // Button Constructor
-Button::Button(int X, int Y, int width, int height, string buttonText, int textSize, Color textColor, Color buttonColor, string fontFilepath)
+Button::Button(float X, float Y, float width, float height, string buttonText, int textSize, Color textColor, Color buttonColor, string fontFilepath)
 	: X{X}, Y{Y}, width{width}, height{height}, buttonColor{buttonColor}, rect{RectangleShape(Vector2f(width, height))}
 	{
 	// Load Font And Set Text String/Position/Color

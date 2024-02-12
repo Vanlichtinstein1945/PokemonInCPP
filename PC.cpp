@@ -87,7 +87,7 @@ void PC::savePC() const {
 			<< i->get_EV(SPDEF) << ","
 			<< i->get_EV(SPD) << ","
 			<< i->get_currHP() << ","
-			<< (int)i->get_nature() << "\n";
+			<< i->get_nature() << "\n";
 	}
 	pcData.close();
 }

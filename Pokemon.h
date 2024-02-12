@@ -8,7 +8,7 @@
 
 
 // Creating Typings
-const enum TYPES {
+constexpr enum TYPES {
 	None,
 	Normal,
 	Fire,
@@ -54,7 +54,7 @@ const std::string TYPES_STRINGS[] = {
 };
 
 // Creating XP Typings
-const enum XPTYPE {
+constexpr enum XPTYPE {
 	Erratic,
 	Fast,
 	MediumFast,
@@ -74,7 +74,7 @@ const std::string XPTYPE_STRINGS[] = {
 };
 
 // Creating Stat Identifiers
-const enum STAT {
+constexpr enum STAT {
 	HP,
 	ATK,
 	DEF,
@@ -84,7 +84,7 @@ const enum STAT {
 };
 
 // Creating Nature Typings
-const enum NATURES {
+constexpr enum NATURES {
 	Hardy,
 	Lonely,
 	Adamant,
@@ -156,7 +156,7 @@ public:
 	inline Stats(int hp, int atk, int def, int spAtk, int spDef, int spd)
 		: hp{ hp }, atk{ atk }, def{ def }, spAtk{ spAtk }, spDef{ spDef }, spd{ spd } {}
 	
-	int get_stat(STAT) const;
+	constexpr int get_stat(STAT) const;
 };
 
 // Class To Hold Database Info For Creating Pokemon
@@ -201,7 +201,7 @@ private:
 	
 	void generateIVs();
 	
-	float getNatureModifier(STAT) const;
+	constexpr float getNatureModifier(STAT) const;
 	
 	void determineCombinedStats();
 
@@ -219,17 +219,17 @@ public:
 	
 	inline std::string get_name() const { return name; }
 	
-	inline int get_currHP() const { return currHP; }
+	inline constexpr int get_currHP() const { return currHP; }
 	
-	inline int get_speciesIndex() const { return speciesIndex; }
+	inline constexpr int get_speciesIndex() const { return speciesIndex; }
 	
-	inline int get_level() const { return level; }
+	inline constexpr int get_level() const { return level; }
 	
-	inline int get_totalXP() const { return totalXP; }
+	inline constexpr int get_totalXP() const { return totalXP; }
 	
-	inline NATURES get_nature() const { return nature; }
+	inline constexpr NATURES get_nature() const { return nature; }
 	
-	TYPES* get_types();
+	TYPES* get_types() const;
 	
 	int get_IV(STAT) const;
 	

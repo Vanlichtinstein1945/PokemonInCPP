@@ -22,7 +22,7 @@ using namespace std;
 
 
 // Basic Stats Getter
-int Stats::get_stat(STAT stat) const {
+constexpr int Stats::get_stat(STAT stat) const {
 	switch (stat) {
 	case HP:
 		return hp;
@@ -142,7 +142,7 @@ void BasePokemon::generateIVs() {
 }
 
 // Getting Stat Modifier From Current Nature
-float BasePokemon::getNatureModifier(STAT stat) const {
+constexpr float BasePokemon::getNatureModifier(STAT stat) const {
 	float modifier = 1;
 	switch (stat) {
 	case ATK:
@@ -226,7 +226,7 @@ BasePokemon::BasePokemon(int speciesIndex, int level, int totalXP, Stats* IVs, S
 }
 
 // Function To Return The Typings
-TYPES* BasePokemon::get_types() { static TYPES tempTypes[2]; tempTypes[0] = type1; tempTypes[1] = type2; return tempTypes; }
+TYPES* BasePokemon::get_types() const { static TYPES tempTypes[2]; tempTypes[0] = type1; tempTypes[1] = type2; return tempTypes; }
 
 // Function To Get IVs
 int BasePokemon::get_IV(STAT stat) const {
@@ -236,7 +236,7 @@ int BasePokemon::get_IV(STAT stat) const {
 	case DEF:   return IVs->get_stat(DEF);
 	case SPATK: return IVs->get_stat(SPATK);
 	case SPDEF: return IVs->get_stat(SPDEF);
-	case SPD:   return IVs->get_stat(SPD);
+	default:   return IVs->get_stat(SPD);
 	}
 }
 
@@ -248,7 +248,7 @@ int BasePokemon::get_EV(STAT stat) const {
 	case DEF:   return EVs->get_stat(DEF);
 	case SPATK: return EVs->get_stat(SPATK);
 	case SPDEF: return EVs->get_stat(SPDEF);
-	case SPD:   return EVs->get_stat(SPD);
+	default:   return EVs->get_stat(SPD);
 	}
 }
 
@@ -260,7 +260,7 @@ int BasePokemon::get_stat(STAT stat) const {
 	case DEF:   return combinedStats->get_stat(DEF);
 	case SPATK: return combinedStats->get_stat(SPATK);
 	case SPDEF: return combinedStats->get_stat(SPDEF);
-	case SPD:   return combinedStats->get_stat(SPD);
+	default:   return combinedStats->get_stat(SPD);
 	}
 }
 
