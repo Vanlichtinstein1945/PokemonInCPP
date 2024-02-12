@@ -6,11 +6,15 @@ to move forward with the SFML library for developing the GUI and handling
 the actual sprite manipulation.
 
 ## pokemonData.csv
-This is the csv file that will eventually hold of the pokemons' base data
+This is the csv file that will eventually hold all of the pokemons' base data
 for loading and creating
 
 ## PCData.csv
 This is the csv file created by the PC to save and load pokemon from
+
+## Moves.csv
+This is the csv file that will eventually hold all of the moves' data
+for loading and creating
 
 ## pokemon stats.py
 Not completed yet, but this is a python program that will be used to webscrape
